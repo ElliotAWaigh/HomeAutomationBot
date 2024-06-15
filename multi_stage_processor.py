@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 import numpy as np
 import re
 from entity_extractor import EntityExtractor
-import Tools.football as football
+import Tools.Tool1 as Tool1
 
 class MultiStageProcessor:
     def __init__(self):
@@ -114,16 +114,11 @@ class MultiStageProcessor:
         return "I'm not sure how to handle this. Can you rephrase?", True
 
     def determine_required_context(self, question):
-        if "Who is the top scorer in BLANK?" in question:
-            return football.context_for_goal_scorer()
-        elif "Can you show me the stats of" in question:
-            return football.context_for_player_stats()
+        if "Question 1" in question:
+            return Tool1.context_for_Q1()
         return {}, {}
 
     def perform_action_based_on_context(self, question, context):
-        if "Who is the top scorer in BLANK?" in question:
-            return football.action_for_goal_scorer(context)
-        
-        elif "Can you show me the stats of" in question:
-            return football.action_for_player_stats(context)
+        if "Question 1" in question:
+            return Tool1.action_for_Q1(context)
         return "I'm sorry, I don't know how to handle that question."
